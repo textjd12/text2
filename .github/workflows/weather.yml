@@ -1,0 +1,43 @@
+name: Build and Deploy
+on: 
+  push:
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout 🛎️
+      uses: actions/checkout@v2.3.1
+
+    - name: Install node
+      uses: actions/setup-node@v2
+      with:
+        node-version: '12'
+
+    - name: Get suggestion
+      run: npm install
+      
+    - name: "获取天气"
+      run: |
+        node weather.js
+
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@4.1.0
+      with:
+        branch: gh-pages
+        folder: .
+
+    - name: Send mail ✉️
+      uses: dawidd6/action-send-mail@v2
+      with:
+        # smtp 服务器地址
+        server_address: smtp.163.com
+        # smtp 服务器端口
+        server_port: 465
+        username: ${{secrets.MAIL_USERNAME}}
+        password: ${{secrets.MAIL_PASSWORD}}
+        subject: 今日穿衣建议
+        body: file://index.html
+        to: 598777720@qq.com
+        from: hgwxxdd 
+        content_type: text/html
+        convert_markdown: true
