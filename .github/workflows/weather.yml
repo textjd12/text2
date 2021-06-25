@@ -37,7 +37,7 @@ jobs:
         password: ${{secrets.MAIL_PASSWORD}}
         subject: 今日穿衣建议
         body: file://index.html
-        to: 598777720@qq.com
+        to: 417213381@qq.com
         from: hgwxxdd 
         content_type: text/html
         convert_markdown: true
