@@ -13,7 +13,7 @@ jobs:
       with:
         node-version: '12'
 
-    - name: Get suggestion
+    - name: Npm install
       run: npm install
       
     - name: "获取天气"
